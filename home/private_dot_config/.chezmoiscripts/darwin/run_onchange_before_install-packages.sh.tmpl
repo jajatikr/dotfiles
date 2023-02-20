@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+{{ $brews := list
+     "bitwarden-cli"
+     "curl"
+     "exa"
+     "ripgrep"
+     "starship" -}}
+{{ $casks := list
+     "alacritty"
+     "font-fira-code-nerd-font"
+     "visual-studio-code"
+     "firefox"
+     "fork"
+     "rectangle"
+     "vlc" -}}
+
+{{ if .personal -}}
+{{   $casks = concat $casks (list
+       "whatsapp") -}}
+{{ end -}}
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+{{ range ($brews | sortAlpha | uniq) -}}
+brew "{{ . }}"
+{{ end -}}
+{{ range ($casks | sortAlpha | uniq) -}}
+cask "{{ . }}"
+{{ end -}}
+EOF

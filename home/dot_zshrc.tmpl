@@ -1,0 +1,83 @@
+# If you come from bash you might have to change your $PATH.
+{{- $paths := list }}
+{{- $homeDir := .chezmoi.homeDir }}
+{{- range $_, $relPath := list "bin" "go/bin" ".cargo/bin" ".local/bin" }}
+{{    $path := joinPath $homeDir $relPath }}
+{{-   if stat $path }}
+{{-     $paths = mustAppend $paths $path }}
+{{-   end }}
+{{- end }}
+{{- if $paths }}
+export PATH={{ toStrings $paths | join ":" }}:$PATH
+{{- end }}
+
+export PATH="$HOME/bin:$PATH"
+
+setopt histignorespace
+setopt rm_star_silent
+
+alias g=git
+alias gnp="git --no-pager"
+{{- if lookPath "bat" }}
+alias cat=bat
+{{- else if lookPath "batcat" }}
+alias cat=batcat
+{{- end }}
+{{- if lookPath "exa" }}
+alias ls=exa
+{{- end }}
+
+export EDITOR="code --wait" #nvim
+export GOPATH=$HOME
+export GO111MODULE=on
+{{- if eq .chezmoi.os "darwin" }}
+export HOMEBREW_NO_ANALYTICS=1
+{{- end }}
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export RIPGREP_CONFIG_PATH=~/.config/ripgrep/config
+
+# {- if .personal }}
+# export CHEZMOI_GITHUB_ACCESS_TOKEN={{ onepasswordRead "op://Personal/chezmoi GitHub API Token/credential" .onepasswordAccount | trim }}
+# {{-   if eq .chezmoi.os "darwin" }}
+# export HOMEBREW_GITHUB_API_TOKEN={{ onepasswordRead "op://Personal/Homebrew GitHub API Token/credential" .onepasswordAccount | trim }}
+# {{-   end }}
+# {{- end }}
+
+# github-cd() {
+# 	local dir="${HOME}/src/github.com/$1"
+# 	cd "${dir}"
+# }
+
+# github-clone-cd() {
+# 	local prefix=https://github.com/
+# 	if [ "$1" = "--ssh" ]; then
+# 		prefix=git@github.com:
+# 		shift
+# 	fi
+# 	local dir="${HOME}/src/github.com/$1"
+# 	if [ ! -d "${dir}" ]; then
+# 		git clone "${prefix}$1.git" "${dir}"
+# 	fi
+# 	cd "${dir}"
+# }
+
+# github-clone-code() {
+# 	local prefix=https://github.com/
+# 	if [ "$1" = "--ssh" ]; then
+# 		prefix=git@github.com:
+# 		shift
+# 	fi
+# 	local dir="${HOME}/src/github.com/$1"
+# 	if [ ! -d "${dir}" ]; then
+# 		git clone "${prefix}$1.git" "${dir}"
+# 	fi
+# 	code "${dir}"
+# }
+
+
+{{- /* vim: set filetype=zsh: */}}
+
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+eval "$(starship init zsh)"

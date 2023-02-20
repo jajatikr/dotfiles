@@ -1,0 +1,23 @@
+{{ if ne .chezmoi.os "darwin" }}
+.chezmoiscripts/darwin/**
+{{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+.chezmoiscripts/linux/**
+.local/share/fonts
+{{ end }}
+
+{{ if ne .chezmoi.os "windows" }}
+.chezmoiscripts/windows/**
+Documents
+{{ else }}
+.bash_aliases
+.config/git/cookies
+.gnupg
+.gnupg/**
+.ssh/id_rsa
+.ssh/id_rsa.pub
+.zprofile
+.zshrc
+{{ end }}
+

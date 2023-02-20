@@ -1,0 +1,26 @@
+{{/* boolean feature tags */}}
+{{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
+{{- "" -}}
+
+{{/* work around unreliable hostname on darwin */}}
+{{- $hostname := .chezmoi.hostname -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $computerName := output "scutil" "--get" "ComputerName" | trim -}}
+{{-   if eq $computerName "Jajati’s Mac mini" -}}
+{{-     $hostname = "jajati-mac-mini" -}}
+{{-   else -}}
+{{-     $hostname = $computerName -}}
+{{-   end -}}
+{{- end -}}
+
+
+{{- if eq $hostname "jajati-mac-mini" -}}
+{{-   $personal = true -}}
+{{- end -}}
+
+{{- $email := "jajatikr@protonmail.com" -}}
+
+[data]
+    email = {{ $email | quote }}
+    hostname = {{ $hostname | quote }}
+    personal = {{ $personal }}
