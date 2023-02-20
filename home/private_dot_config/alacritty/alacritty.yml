@@ -1,8 +1,8 @@
 live_config_reload: true
 
 scrolling:
-    history: 10000
-    multiplier: 10
+  history: 10000
+  multiplier: 10
 
 font:
   normal:
@@ -20,5 +20,6 @@ font:
   size: 14.0
 
 cursor:
-  style: Block
+  style:
+    shape: Block
   unfocused_hollow: true

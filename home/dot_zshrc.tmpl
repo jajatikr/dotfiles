@@ -37,45 +37,6 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export RIPGREP_CONFIG_PATH=~/.config/ripgrep/config
 
-# {- if .personal }}
-# export CHEZMOI_GITHUB_ACCESS_TOKEN={{ onepasswordRead "op://Personal/chezmoi GitHub API Token/credential" .onepasswordAccount | trim }}
-# {{-   if eq .chezmoi.os "darwin" }}
-# export HOMEBREW_GITHUB_API_TOKEN={{ onepasswordRead "op://Personal/Homebrew GitHub API Token/credential" .onepasswordAccount | trim }}
-# {{-   end }}
-# {{- end }}
-
-# github-cd() {
-# 	local dir="${HOME}/src/github.com/$1"
-# 	cd "${dir}"
-# }
-
-# github-clone-cd() {
-# 	local prefix=https://github.com/
-# 	if [ "$1" = "--ssh" ]; then
-# 		prefix=git@github.com:
-# 		shift
-# 	fi
-# 	local dir="${HOME}/src/github.com/$1"
-# 	if [ ! -d "${dir}" ]; then
-# 		git clone "${prefix}$1.git" "${dir}"
-# 	fi
-# 	cd "${dir}"
-# }
-
-# github-clone-code() {
-# 	local prefix=https://github.com/
-# 	if [ "$1" = "--ssh" ]; then
-# 		prefix=git@github.com:
-# 		shift
-# 	fi
-# 	local dir="${HOME}/src/github.com/$1"
-# 	if [ ! -d "${dir}" ]; then
-# 		git clone "${prefix}$1.git" "${dir}"
-# 	fi
-# 	code "${dir}"
-# }
-
-
 {{- /* vim: set filetype=zsh: */}}
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
