@@ -18,8 +18,11 @@ set -eufo pipefail
      "vlc" -}}
 
 {{ if .personal -}}
+{{   $brews = concat $brews (list
+       "go"
+       "rust") -}}
 {{   $casks = concat $casks (list
-       "whatsapp") -}}
+       "transmission") -}}
 {{ end -}}
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
