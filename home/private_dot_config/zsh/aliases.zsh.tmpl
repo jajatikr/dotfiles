@@ -1,0 +1,38 @@
+# ALIASES -----------------------------------
+
+alias rld="source ~/.zshrc"
+alias c="clear"
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
+
+# Navigate
+alias cdw="cd ~/Documents/workspace"
+alias ..="cd .."
+alias ...="cd ../.."
+{{- if lookPath "exa" }}
+alias l="exa -F"
+alias ls="exa -aF"
+alias la="exa -alF"
+{{- end }}
+{{- if lookPath "bat" }}
+alias cat=bat
+{{- else if lookPath "batcat" }}
+alias cat=batcat
+{{- end }}
+
+# Edit configs
+alias edit_zshrc="code ~/.zshrc"
+
+# Python
+alias python="python3"
+
+# Git
+alias g="git"
+alias gnp="git --no-pager"
+
+# FUNCTIONS -----------------------------------
+
+killport() {
+    lsof -t -i tcp:$1 | xargs kill -9
+}

@@ -14,16 +14,8 @@ export PATH={{ toStrings $paths | join ":" }}:$PATH
 setopt histignorespace
 setopt rm_star_silent
 
-alias g=git
-alias gnp="git --no-pager"
-{{- if lookPath "bat" }}
-alias cat=bat
-{{- else if lookPath "batcat" }}
-alias cat=batcat
-{{- end }}
-{{- if lookPath "exa" }}
-alias ls=exa
-{{- end }}
+source ~/.config/zsh/aliases.zsh
+source ~/.config/bw/bw.zsh
 
 export EDITOR="code --wait" # nvim
 export GOPATH=$HOME
