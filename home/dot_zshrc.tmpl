@@ -20,9 +20,6 @@ source ~/.config/bw/bw.zsh
 export EDITOR="code --wait" # nvim
 export GOPATH=$HOME
 export GO111MODULE=on
-{{- if eq .chezmoi.os "darwin" }}
-export HOMEBREW_NO_ANALYTICS=1
-{{- end }}
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export RIPGREP_CONFIG_PATH=~/.config/ripgrep/config
