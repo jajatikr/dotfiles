@@ -10,10 +10,10 @@ alias vim="nvim"
 alias cdw="cd ~/Documents/workspace"
 alias ..="cd .."
 alias ...="cd ../.."
-{{- if lookPath "exa" }}
-alias l="exa -F"
-alias ls="exa -aF"
-alias la="exa -alF"
+{{- if lookPath "eza" }}
+alias l="eza -F"
+alias ls="eza -aF"
+alias la="eza -alF"
 {{- end }}
 {{- if lookPath "bat" }}
 alias cat=bat
@@ -23,7 +23,6 @@ alias cat=batcat
 
 # Edit configs
 alias edit_zshrc="code ~/.zshrc"
-alias edit_espanso="code ~/Library/Application\ Support/espanso/match/base.yml"
 
 # Python
 alias python="python3"

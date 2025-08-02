@@ -3,9 +3,8 @@
 set -eufo pipefail
 
 {{ $brews := list
-     "bitwarden-cli"
      "curl"
-     "exa"
+     "eza"
      "gh"
      "jq"
      "poetry"
@@ -13,16 +12,16 @@ set -eufo pipefail
      "starship"
      "terraform" -}}
 {{ $casks := list
-     "alacritty"
-     "espanso"
+     "appcleaner"
      "google-chrome"
-     "google-cloud-sdk"
+     "gcloud-cli"
      "firefox"
      "font-fira-code-nerd-font"
      "fork"
      "git-credential-manager-core"
      "hiddenbar"
      "itsycal"
+     "raycast"
      "rectangle"
      "the-unarchiver"
      "visual-studio-code"
@@ -37,11 +36,10 @@ set -eufo pipefail
        "ledger-live"
        "steam"
        "transmission"
-       "vpn-by-google-one"
        "whatsapp") -}}
 {{ end -}}
 
-brew bundle --no-lock --file=/dev/stdin <<EOF
+brew bundle --file=/dev/stdin <<EOF
 {{ range ($brews | sortAlpha | uniq) -}}
 brew "{{ . }}"
 {{ end -}}
