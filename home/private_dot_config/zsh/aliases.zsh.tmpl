@@ -30,9 +30,3 @@ alias python="python3"
 # Git
 alias g="git"
 alias gnp="git --no-pager"
-
-# FUNCTIONS -----------------------------------
-
-killport() {
-    lsof -t -i tcp:$1 | xargs kill -9
-}

@@ -1,26 +1,26 @@
 {{/* boolean feature tags */}}
+{{- $ephemeral := false -}}{{/* true if this machine is ephemeral, e.g. a cloud or VM instance */}}
+{{- $work := false -}}{{/* true if this machine is a work machine */}}
 {{- $personal := false -}}{{/* true if this machine should have personal secrets */}}
 {{- "" -}}
 
 {{/* work around unreliable hostname on darwin */}}
 {{- $hostname := .chezmoi.hostname -}}
 {{- if eq .chezmoi.os "darwin" -}}
-{{-   $computerName := output "scutil" "--get" "ComputerName" | trim -}}
-{{-   if eq $computerName "Jajati’s Mac mini" -}}
-{{-     $hostname = "jajati-mac-mini" -}}
-{{-   else -}}
-{{-     $hostname = $computerName -}}
-{{-   end -}}
+{{-   $hostname := output "scutil" "--get" "LocalHostName" | trim -}}
 {{- end -}}
 
-
-{{- if eq $hostname "jajati-mac-mini" -}}
-{{-   $personal = true -}}
+{{- if not $ephemeral -}}
+{{-   if eq $hostname "Jajatis-Mac-mini" -}}
+{{-     $personal = true -}}
+{{-   end -}}
 {{- end -}}
 
 {{- $email := "jajatikr@protonmail.com" -}}
 
 [data]
+    ephemeral = {{ $ephemeral }}
     email = {{ $email | quote }}
+    work = {{ $work }}
     hostname = {{ $hostname | quote }}
     personal = {{ $personal }}
